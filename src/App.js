@@ -1,19 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {Layout} from "antd"
+import "antd/dist/antd.css"
+import {Route, Router} from "react-router"
+import {BrowserRouter, Switch, NavLink} from "react-router-dom"
+
+const {Header, Sider, Content, Footer} = Layout;
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Layout>
+        {/* 左侧菜单 */}
+        <Sider>
+          左侧菜单 {/* <Router> */}
+
+          {/* <NavLink to="">例子</NavLink> */}
+          {/* </Router> */}
+
+        </Sider>
+        {/* 右侧内容 */}
+        <Content>
+          右侧内容 {/* <BrowserRouter>
+              <Switch>
+                <Route exact path="/"/>
+              </Switch>
+            </BrowserRouter> */}
+        </Content>
+      </Layout>
     );
   }
 }

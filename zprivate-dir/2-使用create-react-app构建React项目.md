@@ -1,5 +1,5 @@
 
-## 1.使用create-react-app自动化构建项目
+## 1.React学习笔记—（2）使用create-react-app自动化构建项目
 ```
 $ cnpm install -g create-react-app
 $ create-react-app react-learning
@@ -115,9 +115,9 @@ export default App;导出。
     }
 });
 ```
-> 演示：  
+> <a href="https://nongweiyi.github.io/react-learning/build/index.html">点此查看演示</a> 
 
-> 代码地址：
+> <a href="https://github.com/nongweiyi/react-learning">源代码github地址</a> 
 
 
 > 文章参照  <a href="http://www.runoob.com/react/" target="_blank"> [ 菜鸟教程-react ]</a>  
