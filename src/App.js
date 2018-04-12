@@ -1,32 +1,45 @@
 import React, {Component} from 'react';
 import {Layout} from "antd"
 import "antd/dist/antd.css"
-import {Route, Router} from "react-router"
-import {BrowserRouter, Switch, NavLink} from "react-router-dom"
+import styles from "./App.less"
 
-const {Header, Sider, Content, Footer} = Layout;
-
+import {BrowserRouter, Route, NavLink, Switch} from "react-router-dom"
+import LifeCycle from "./pages/lifecycle/lifecycle"
+import stateProp from "./pages/stateProp/stateProp"
+import Home from "./pages/home/home"
+const {Sider, Content} = Layout;
 class App extends Component {
   render() {
     return (
-      <Layout>
-        {/* 左侧菜单 */}
-        <Sider>
-          左侧菜单 {/* <Router> */}
+      <BrowserRouter>
+        {/* <Layout> */}
+          {/* 左侧菜单 */}
+          {/* <Sider className={styles.containerSider}>
+            左侧菜单
+            <ul>
+              <li>
+                <NavLink to="/stateProp">stateProp</NavLink>
+              </li>
+              <li>
+                <NavLink to="/lifecycle">lifecycle</NavLink>
+              </li>
+            </ul>
 
-          {/* <NavLink to="">例子</NavLink> */}
-          {/* </Router> */}
-
-        </Sider>
-        {/* 右侧内容 */}
-        <Content>
-          右侧内容 {/* <BrowserRouter>
-              <Switch>
-                <Route exact path="/"/>
-              </Switch>
-            </BrowserRouter> */}
-        </Content>
+          </Sider> */}
+          {/* 右侧内容 */}
+          {/* <Content className={styles.containerContent}>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route path="/stateProp" component={stateProp}/>
+              <Route path="/lifecycle" component={LifeCycle}/>
+            </Switch>
+          </Content> */}
+        {/* </Layout> */}
+        <Layout>
+        <Sider>Header</Sider>
+        <Content>Content</Content>
       </Layout>
+      </BrowserRouter>
     );
   }
 }
