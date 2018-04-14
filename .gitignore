@@ -8,7 +8,7 @@
 
 # production
 # /build
-/zprivate-dir/img
+/zprivate-dir
 
 # misc
 .DS_Store

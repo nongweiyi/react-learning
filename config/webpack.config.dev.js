@@ -71,8 +71,8 @@ module.exports = {
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
-    // We placed these paths second because we want `node_modules` to "win" if there
-    // are any conflicts. This matches Node resolution mechanism.
+    // We placed these paths second because we want `node_modules` to "win" if
+    // there are any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
     modules: ['node_modules', paths.appNodeModules].concat(
     // It is guaranteed to exist because we tweak it in `env.js`
@@ -91,7 +91,10 @@ module.exports = {
       '.jsx'
     ],
     alias: {
-
+      "@src":path.resolve("src"),
+      "@component":path.resolve("src/component"),
+      "@pages":path.resolve("src/pages"),
+      "@utils":path.resolve("src/utils"),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react
       // - native-for-web/
@@ -149,25 +152,13 @@ module.exports = {
             test: /\.(js|jsx|mjs)$/,
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
+           
             options: {
-
               // This is a feature of `babel-loader` for webpack (not Babel itself). It
               // enables caching results in ./node_modules/.cache/babel-loader/ directory for
               // faster rebuilds.
               cacheDirectory: true
             }
-          }, {
-            test: /\.less$/,
-            use: [
-              {
-                loader: require.resolve('less-loader'),
-                options: {
-                  importLoaders: 1,
-                  modules: true, // 新增对css modules的支持
-                  localIdentName: '[name]__[local]__[hash:base64:5]'
-                }
-              }
-            ]
           },
 
           // "postcss" loader applies autoprefixer to our CSS. "css" loader resolves paths
@@ -178,13 +169,44 @@ module.exports = {
 
           {
             test: /\.css$/,
+            exclude:[/node_modules/],
             use: [
               require.resolve('style-loader'), {
                 loader: require.resolve('css-loader'),
                 options: {
                   importLoaders: 1,
-                  // modules: true, // 新增对css modules的支持 localIdentName:
-                  // '[name]__[local]__[hash:base64:5]'
+                  modules: true, // 新增对css modules的支持
+                  localIdentName: '[name]__[local]__[hash:base64:5]'
+                }
+              }, {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009'
+                    })
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            exclude:[/src/],
+            use: [
+              require.resolve('style-loader'), {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  // modules: true, // 新增对css modules的支持
+                  // localIdentName: '[name]__[local]__[hash:base64:5]'
                 }
               }, {
                 loader: require.resolve('postcss-loader'),
